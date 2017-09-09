@@ -11,7 +11,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.template.html',
       filename: 'index.html',
-      inject: 'body'
+      inject: 'body',
+      title: 'react-redux-boilerplate'
     })
   ],
   output: {
