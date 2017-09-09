@@ -1,9 +1,8 @@
 # react-redux-boilerplate
 
-Setup
+> TODO
 
-* Install [nvm](https://github.com/creationix/nvm)
-* Install [yarn](https://yarnpkg.com/en)
+### Setup
 
 ```
 # use node version in .nvmrc
@@ -15,3 +14,10 @@ yarn install
 # generate distribution
 yarn run build
 ```
+
+### Documentation
+
+* [nvm](https://github.com/creationix/nvm)
+* [yarn](https://yarnpkg.com/en)
+* [webpack](https://webpack.js.org)
+* [Babel](https://babeljs.io)
