@@ -24,3 +24,4 @@ yarn build
 * [yarn](https://yarnpkg.com/en)
 * [webpack](https://webpack.js.org)
 * [Babel](https://babeljs.io)
+* [React](https://facebook.github.io/react)
