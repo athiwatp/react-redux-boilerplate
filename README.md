@@ -11,8 +11,11 @@ nvm use
 # install packages
 yarn install
 
-# generate distribution
-yarn run build
+# run development
+yarn start
+
+# build distribution
+yarn build
 ```
 
 ### Documentation
