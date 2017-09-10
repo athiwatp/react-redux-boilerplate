@@ -30,5 +30,7 @@ yarn build
 * [yarn](https://yarnpkg.com/en)
 * [webpack](https://webpack.js.org)
 * [Babel](https://babeljs.io)
-* [React](https://facebook.github.io/react)
 * [Prettier](https://prettier.io)
+* [React](https://facebook.github.io/react)
+* [Redux](http://redux.js.org)
+* [Redux DevTools](https://github.com/gaearon/redux-devtools)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Repository from '../repository/RepositoryComponent.jsx'
+import Repository from './RepositoryComponent.jsx'
 
 export default class GitHub extends Component {
   constructor(props) {
