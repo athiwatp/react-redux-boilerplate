@@ -1,6 +1,7 @@
 {
-  "*.js*": [
-    "format",
-    "git add"
+  "src/**/*.js": [
+   "lint",
+   "format",
+   "git add"
   ]
 }
