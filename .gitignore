@@ -6,3 +6,5 @@ dist/
 
 *.iml
 .idea/
+
+yarn-error.log

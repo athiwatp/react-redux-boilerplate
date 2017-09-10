@@ -14,6 +14,9 @@ yarn install
 # run development
 yarn start
 
+# verify style
+yarn run lint
+
 # format code
 yarn run format
 
