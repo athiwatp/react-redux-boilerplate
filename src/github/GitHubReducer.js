@@ -6,7 +6,10 @@ import {
 } from './GitHubActionTypes'
 
 const initialState = {
-  repositories: []
+  repositories: [
+    { name: "name1", link: "link1", star: 1},
+    { name: "name2", link: "link2", star: 2}
+  ]
 }
 
 export default function github (state = initialState, action) {
@@ -18,7 +21,9 @@ export default function github (state = initialState, action) {
     case GITHUB_REPOSITORY_FAILURE:
       return state
     case GITHUB_REPOSITORY_CLEAR:
-      return state
+      return Object.assign({}, state, {
+        repositories: []
+      })
     default:
       return state
   }

@@ -16,6 +16,7 @@ export default class GitHub extends Component {
 
   clearRepositories () {
     console.log('clearRepositories')
+    this.props.onClearRepositories()
   }
 
   render () {
@@ -24,13 +25,13 @@ export default class GitHub extends Component {
         <div>GitHub</div>
         <button onClick={this.requestRepositories}>REQUEST</button>
         <button onClick={this.clearRepositories}>CLEAR</button>
-        {/*{repositories.map(repository =>*/}
-          {/*<Repository*/}
-            {/*key={index}*/}
-            {/*name={repository.name}*/}
-            {/*link={repository.link}*/}
-            {/*star={repository.star}*/}
-          {/*/>)}*/}
+        {this.props.repositories.map(repository =>
+          <Repository
+            key={repository.name}
+            name={repository.name}
+            link={repository.link}
+            star={repository.star}
+          />)}
       </div>
     )
   }
