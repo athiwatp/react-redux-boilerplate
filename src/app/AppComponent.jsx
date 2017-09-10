@@ -6,7 +6,7 @@ export default class App extends Component {
     return (
       <div>
         <div>header</div>
-        <GitHub />
+        <GitHub/>
         <div>footer</div>
       </div>
     )
