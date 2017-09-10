@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import GitHubComponent from './GitHubComponent.jsx'
 import { repositoryClear, repositoryRequest } from './GitHubActions'
 
-export function GitHub ({repositories, actions}) {
+export function GitHub({ repositories, actions }) {
   return (
     <GitHubComponent
       repositories={repositories}
@@ -20,20 +20,20 @@ GitHub.propTypes = {
   actions: PropTypes.object.isRequired
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     repositories: state.github.repositories
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     // https://gist.github.com/markerikson/f46688603e3842af0f9720dea05b1a9e
-    actions: bindActionCreators({repositoryRequest, repositoryClear}, dispatch)
+    actions: bindActionCreators(
+      { repositoryRequest, repositoryClear },
+      dispatch
+    )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GitHub)
+export default connect(mapStateToProps, mapDispatchToProps)(GitHub)

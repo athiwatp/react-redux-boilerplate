@@ -3,35 +3,35 @@ import PropTypes from 'prop-types'
 import Repository from '../repository/RepositoryComponent.jsx'
 
 export default class GitHub extends Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.requestRepositories = this.requestRepositories.bind(this)
     this.clearRepositories = this.clearRepositories.bind(this)
   }
 
-  requestRepositories () {
+  requestRepositories() {
     console.log('requestRepositories')
   }
 
-  clearRepositories () {
+  clearRepositories() {
     console.log('clearRepositories')
     this.props.onClearRepositories()
   }
 
-  render () {
+  render() {
     return (
       <div>
         <div>GitHub</div>
         <button onClick={this.requestRepositories}>REQUEST</button>
         <button onClick={this.clearRepositories}>CLEAR</button>
-        {this.props.repositories.map(repository =>
+        {this.props.repositories.map(repository => (
           <Repository
             key={repository.name}
             name={repository.name}
             link={repository.link}
             star={repository.star}
-          />)}
+          />
+        ))}
       </div>
     )
   }

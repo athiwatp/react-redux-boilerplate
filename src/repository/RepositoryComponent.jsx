@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function Repository ({name, link, star}) {
+export default function Repository({ name, link, star }) {
   return (
     <div>
       <div>{name}</div>
