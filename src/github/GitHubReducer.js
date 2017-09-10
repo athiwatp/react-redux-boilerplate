@@ -7,12 +7,12 @@ import {
 
 const initialState = {
   repositories: [
-    { name: "name1", link: "link1", star: 1},
-    { name: "name2", link: "link2", star: 2}
+    { name: 'name1', link: 'link1', star: 1 },
+    { name: 'name2', link: 'link2', star: 2 }
   ]
 }
 
-export default function github (state = initialState, action) {
+export default function github(state = initialState, action) {
   switch (action.type) {
     case GITHUB_REPOSITORY_REQUEST:
       return state

@@ -5,25 +5,25 @@ import {
   GITHUB_REPOSITORY_SUCCESS
 } from './GitHubActionTypes'
 
-export function repositoryRequest () {
+export function repositoryRequest() {
   return {
     type: GITHUB_REPOSITORY_REQUEST
   }
 }
 
-export function repositorySuccess () {
+export function repositorySuccess() {
   return {
     type: GITHUB_REPOSITORY_SUCCESS
   }
 }
 
-export function repositoryFailure () {
+export function repositoryFailure() {
   return {
     type: GITHUB_REPOSITORY_FAILURE
   }
 }
 
-export function repositoryClear () {
+export function repositoryClear() {
   return {
     type: GITHUB_REPOSITORY_CLEAR
   }

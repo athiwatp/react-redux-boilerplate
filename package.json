@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "format": "prettier --config .prettierrc --write \"src/**/*.js\""
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -12,6 +13,7 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
     "html-webpack-plugin": "^2.30.1",
+    "prettier": "^1.6.1",
     "redux-devtools": "^3.4.0",
     "redux-devtools-dock-monitor": "^1.1.2",
     "redux-devtools-log-monitor": "^1.3.0",

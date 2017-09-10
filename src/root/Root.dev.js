@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import App from '../app/AppComponent.jsx'
 import DevTools from './DevTools'
 
-export default function Root ({store}) {
+export default function Root({ store }) {
   return (
     <Provider store={store}>
       <div>

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
 import App from '../app/AppComponent.jsx'
 
-export default function Root ({store}) {
+export default function Root({ store }) {
   return (
     <Provider store={store}>
       <App />

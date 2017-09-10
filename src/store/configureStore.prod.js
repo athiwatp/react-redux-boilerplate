@@ -3,6 +3,6 @@ import rootReducer from '../reducers'
 
 const enhancer = applyMiddleware()
 
-export default function configureStore (initialState) {
+export default function configureStore(initialState) {
   return createStore(rootReducer, initialState, enhancer)
 }

@@ -14,6 +14,9 @@ yarn install
 # run development
 yarn start
 
+# format code
+yarn run format
+
 # build distribution
 yarn build
 ```
@@ -25,3 +28,4 @@ yarn build
 * [webpack](https://webpack.js.org)
 * [Babel](https://babeljs.io)
 * [React](https://facebook.github.io/react)
+* [Prettier](https://prettier.io)
