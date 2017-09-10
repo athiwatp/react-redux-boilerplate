@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { GitHub } from '../github'
+import GitHub from '../github/GitHubContainer.jsx'
 
 export default class App extends Component {
   render () {

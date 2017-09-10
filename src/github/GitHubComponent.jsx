@@ -1,15 +1,47 @@
 import React, { Component } from 'react'
-import { Repository } from '../repository'
+import PropTypes from 'prop-types'
+import Repository from '../repository/RepositoryComponent.jsx'
 
 export default class GitHub extends Component {
+
+  constructor (props) {
+    super(props)
+    this.requestRepositories = this.requestRepositories.bind(this)
+    this.clearRepositories = this.clearRepositories.bind(this)
+  }
+
+  requestRepositories () {
+    console.log('requestRepositories')
+  }
+
+  clearRepositories () {
+    console.log('clearRepositories')
+  }
+
   render () {
     return (
       <div>
         <div>GitHub</div>
-        <Repository name="name1" link="link1" star={1} />
-        <Repository name="name2" link="link2" star={2} />
-        <Repository name="name3" link="link3" star={3} />
+        <button onClick={this.requestRepositories}>REQUEST</button>
+        <button onClick={this.clearRepositories}>CLEAR</button>
+        {/*{repositories.map(repository =>*/}
+          {/*<Repository*/}
+            {/*key={index}*/}
+            {/*name={repository.name}*/}
+            {/*link={repository.link}*/}
+            {/*star={repository.star}*/}
+          {/*/>)}*/}
       </div>
     )
   }
+}
+
+GitHub.propTypes = {
+  repositories: PropTypes.array.isRequired,
+  onRequestRepositories: PropTypes.func.isRequired,
+  onClearRepositories: PropTypes.func.isRequired
+}
+
+GitHub.defaultProps = {
+  repositories: []
 }
