@@ -28,6 +28,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    // https://gist.github.com/markerikson/f46688603e3842af0f9720dea05b1a9e
     actions: bindActionCreators({repositoryRequest, repositoryClear}, dispatch)
   }
 }
