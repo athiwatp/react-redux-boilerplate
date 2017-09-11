@@ -1,7 +1,7 @@
 {
   "src/**/*.js": [
-  "format",
-   "lint",
-   "git add"
+    "format",
+    "lint",
+    "git add"
   ]
 }
