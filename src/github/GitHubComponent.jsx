@@ -5,16 +5,15 @@ import Repository from './RepositoryComponent.jsx'
 export default class GitHub extends Component {
   constructor(props) {
     super(props)
-    this.requestRepositories = this.requestRepositories.bind(this)
+    this.loadRepositories = this.loadRepositories.bind(this)
     this.clearRepositories = this.clearRepositories.bind(this)
   }
 
-  requestRepositories() {
-    console.log('requestRepositories')
+  loadRepositories() {
+    this.props.onLoadRepositories('niqdev')
   }
 
   clearRepositories() {
-    console.log('clearRepositories')
     this.props.onClearRepositories()
   }
 
@@ -22,7 +21,7 @@ export default class GitHub extends Component {
     return (
       <div>
         <div>GitHub</div>
-        <button onClick={this.requestRepositories}>REQUEST</button>
+        <button onClick={this.loadRepositories}>REQUEST</button>
         <button onClick={this.clearRepositories}>CLEAR</button>
         {this.props.repositories.map(repository => (
           <Repository
@@ -39,7 +38,7 @@ export default class GitHub extends Component {
 
 GitHub.propTypes = {
   repositories: PropTypes.array.isRequired,
-  onRequestRepositories: PropTypes.func.isRequired,
+  onLoadRepositories: PropTypes.func.isRequired,
   onClearRepositories: PropTypes.func.isRequired
 }
 

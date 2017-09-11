@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import GitHubComponent from './GitHubComponent.jsx'
-import { repositoryClear, repositoryRequest } from './GitHubActions'
+import { loadRepositories, clearRepositories } from './GitHubActions'
 
 export function GitHub({ repositories, actions }) {
   return (
     <GitHubComponent
       repositories={repositories}
-      onRequestRepositories={actions.repositoryRequest}
-      onClearRepositories={actions.repositoryClear}
+      onLoadRepositories={actions.loadRepositories}
+      onClearRepositories={actions.clearRepositories}
     />
   )
 }
@@ -30,7 +30,7 @@ function mapDispatchToProps(dispatch) {
   return {
     // https://gist.github.com/markerikson/f46688603e3842af0f9720dea05b1a9e
     actions: bindActionCreators(
-      { repositoryRequest, repositoryClear },
+      { loadRepositories, clearRepositories },
       dispatch
     )
   }

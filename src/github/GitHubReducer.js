@@ -1,29 +1,34 @@
 import {
-  GITHUB_REPOSITORY_CLEAR,
-  GITHUB_REPOSITORY_FAILURE,
-  GITHUB_REPOSITORY_REQUEST,
-  GITHUB_REPOSITORY_SUCCESS
+  GITHUB_REPOSITORIES,
+  GITHUB_REPOSITORIES_CLEAR
 } from './GitHubActionTypes'
 
 const initialState = {
-  repositories: [
-    { name: 'name1', link: 'link1', star: 1 },
-    { name: 'name2', link: 'link2', star: 2 }
-  ]
+  repositories: []
 }
+
+const emptyRepositories = state =>
+  Object.assign({}, state, {
+    repositories: []
+  })
 
 export default function github(state = initialState, action) {
   switch (action.type) {
-    case GITHUB_REPOSITORY_REQUEST:
-      return state
-    case GITHUB_REPOSITORY_SUCCESS:
-      return state
-    case GITHUB_REPOSITORY_FAILURE:
-      return state
-    case GITHUB_REPOSITORY_CLEAR:
+    case GITHUB_REPOSITORIES:
+      return emptyRepositories(state)
+    case `${GITHUB_REPOSITORIES}_SUCCESS`:
       return Object.assign({}, state, {
-        repositories: []
+        repositories: (action.payload.data || []).map(item => ({
+          id: item.id,
+          name: item.name,
+          link: item.html_url,
+          star: item.stargazers_count
+        }))
       })
+    case `${GITHUB_REPOSITORIES}_FAIL`:
+      return emptyRepositories(state)
+    case GITHUB_REPOSITORIES_CLEAR:
+      return emptyRepositories(state)
     default:
       return state
   }

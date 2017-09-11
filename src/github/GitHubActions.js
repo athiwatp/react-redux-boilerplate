@@ -1,30 +1,22 @@
 import {
-  GITHUB_REPOSITORY_CLEAR,
-  GITHUB_REPOSITORY_FAILURE,
-  GITHUB_REPOSITORY_REQUEST,
-  GITHUB_REPOSITORY_SUCCESS
+  GITHUB_REPOSITORIES,
+  GITHUB_REPOSITORIES_CLEAR
 } from './GitHubActionTypes'
 
-export function repositoryRequest() {
+export function loadRepositories(username) {
   return {
-    type: GITHUB_REPOSITORY_REQUEST
+    type: GITHUB_REPOSITORIES,
+    payload: {
+      client: 'default',
+      request: {
+        url: `/users/${username}/repos`
+      }
+    }
   }
 }
 
-export function repositorySuccess() {
+export function clearRepositories() {
   return {
-    type: GITHUB_REPOSITORY_SUCCESS
-  }
-}
-
-export function repositoryFailure() {
-  return {
-    type: GITHUB_REPOSITORY_FAILURE
-  }
-}
-
-export function repositoryClear() {
-  return {
-    type: GITHUB_REPOSITORY_CLEAR
+    type: GITHUB_REPOSITORIES_CLEAR
   }
 }
