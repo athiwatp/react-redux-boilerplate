@@ -34,3 +34,4 @@ yarn build
 * [React](https://facebook.github.io/react)
 * [Redux](http://redux.js.org)
 * [Redux DevTools](https://github.com/gaearon/redux-devtools)
+* [axios](https://github.com/mzabriskie/axios) + [redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware)
