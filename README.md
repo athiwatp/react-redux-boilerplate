@@ -1,5 +1,10 @@
 # react-redux-boilerplate
 
+[![CircleCI][circleci-image]][circleci-url]
+
+[circleci-image]: https://circleci.com/gh/brightwindanalysis/react-redux-boilerplate.svg?style=svg
+[circleci-url]: https://circleci.com/gh/brightwindanalysis/react-redux-boilerplate
+
 > TODO
 
 ### Setup
