@@ -1,7 +1,7 @@
 {
   "src/**/*.js": [
-    "format",
     "lint",
+    "prettier --write",
     "git add"
   ]
 }
