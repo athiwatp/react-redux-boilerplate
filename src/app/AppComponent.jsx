@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
-import Header from './HeaderComponent.jsx'
-import GitHub from '../github/GitHubContainer.jsx'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Route, Switch } from 'react-router-dom'
+import Header from './HeaderComponent'
+import GitHub from '../github/GitHubContainer'
 
 const Home = () => (
   <div>
@@ -9,15 +10,28 @@ const Home = () => (
   </div>
 )
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <Header />
+const NotFound = ({ location }) => (
+  <div>
+    <h3>
+      Page not found <code>{location.pathname}</code>
+    </h3>
+  </div>
+)
+
+NotFound.propTypes = {
+  location: PropTypes.string.isRequired
+}
+
+export default function App() {
+  return (
+    <div>
+      <Header />
+      <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/github" component={GitHub} />
-        <div>footer</div>
-      </div>
-    )
-  }
+        <Route component={NotFound} />
+      </Switch>
+      <div>footer</div>
+    </div>
+  )
 }

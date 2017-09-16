@@ -31,12 +31,13 @@ yarn build
 
 ### Documentation
 
+* [React Express](http://www.react.express) introduction
 * [nvm](https://github.com/creationix/nvm)
 * [yarn](https://yarnpkg.com/en)
 * [webpack](https://webpack.js.org)
-* [Babel](https://babeljs.io)
+* [Babel](https://babeljs.io) + [ES2015](https://babeljs.io/learn-es2015)
 * [Prettier](https://prettier.io)
 * [React](https://facebook.github.io/react)
-* [Redux](http://redux.js.org) + [Redux DevTools](https://github.com/gaearon/redux-devtools)
 * [React Router](https://reacttraining.com/react-router/web/guides/philosophy)
+* [Redux](http://redux.js.org) + [Redux DevTools](https://github.com/gaearon/redux-devtools)
 * [axios](https://github.com/mzabriskie/axios) + [redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware)
