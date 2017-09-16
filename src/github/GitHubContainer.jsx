@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import GitHubComponent from './GitHubComponent.jsx'
+import GitHubComponent from './GitHubComponent'
 import { loadRepositories, clearRepositories } from './GitHubActions'
 
-export function GitHub({ repositories, actions }) {
+function GitHub({ repositories, actions }) {
   return (
     <GitHubComponent
       repositories={repositories}

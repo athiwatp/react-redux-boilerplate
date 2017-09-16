@@ -19,7 +19,7 @@ const NotFound = ({ location }) => (
 )
 
 NotFound.propTypes = {
-  location: PropTypes.string.isRequired
+  location: PropTypes.object.isRequired
 }
 
 export default function App() {

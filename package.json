@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "lint": "eslint src",
+    "lint": "eslint src/**/*.js*",
     "format": "prettier --config .prettierrc --write \"src/**/*.js*\"",
     "precommit": "lint-staged"
   },

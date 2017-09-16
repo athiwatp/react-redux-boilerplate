@@ -1,7 +1,7 @@
 {
-  "src/**/*.js": [
-    "lint",
+  "src/**/*.js*": [
     "prettier --write",
+    "lint",
     "git add"
   ]
 }
