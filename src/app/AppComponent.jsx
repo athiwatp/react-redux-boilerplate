@@ -1,17 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Header from './HeaderComponent'
 
-export default function App({ auth }) {
+export default function App() {
   return (
     <div>
-      <Header auth={auth} />
+      <Header />
       <h2>home</h2>
       <div>footer</div>
     </div>
   )
-}
-
-App.propTypes = {
-  auth: PropTypes.object.isRequired
 }

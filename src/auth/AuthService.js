@@ -1,22 +1,20 @@
-const IS_AUTHENTICATED = Symbol('isAuthenticated')
+import LocalStorage from '../storage'
 
+const USER_ID = 'USER_ID'
+
+// dummy authentication service
 export default class AuthService {
-  constructor() {
-    // http://2ality.com/2014/12/es6-symbols.html
-    this[IS_AUTHENTICATED] = false
+  static isAuthenticated() {
+    return LocalStorage.has(USER_ID)
   }
 
-  login(callback) {
-    this[IS_AUTHENTICATED] = true
+  static login(callback) {
+    LocalStorage.set(USER_ID, '123456789')
     setTimeout(callback, 1000)
   }
 
-  logout(callback) {
-    this[IS_AUTHENTICATED] = false
+  static logout(callback) {
+    LocalStorage.remove(USER_ID)
     setTimeout(callback, 1000)
-  }
-
-  isAuthenticated() {
-    return this[IS_AUTHENTICATED]
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { Redirect, Route, withRouter } from 'react-router-dom'
+import AuthService from './AuthService'
 
 class Login extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Login extends Component {
   }
 
   login() {
-    this.props.auth.login(() => {
+    AuthService.login(() => {
       this.setState({ redirectToReferrer: true })
     })
   }
@@ -35,21 +36,39 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  location: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired
 }
 
-const Logout = withRouter(({ history, auth }) => (
+const Logout = withRouter(({ history }) => (
   <button
     onClick={() => {
-      auth.logout(() => history.push('/'))
+      AuthService.logout(() => history.push('/'))
     }}>
     Logout
   </button>
 ))
 
-Logout.propTypes = {
-  auth: PropTypes.object.isRequired
+const PrivateRoute = ({ component: AuthenticatedComponent, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      AuthService.isAuthenticated() ? (
+        <AuthenticatedComponent {...props} />
+      ) : (
+        /* eslint-disable react/prop-types */
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: { from: props.location }
+          }}
+        />
+        /* eslint-enable react/prop-types */
+      )}
+  />
+)
+
+PrivateRoute.propTypes = {
+  component: PropTypes.any.isRequired
 }
 
-export { Login, Logout }
+export { Login, Logout, PrivateRoute }

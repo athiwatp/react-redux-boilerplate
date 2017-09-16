@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Logout } from '../auth/AuthComponent'
 
-export default function Header({ auth }) {
+export default function Header() {
   return (
     <div>
       <ul>
@@ -14,11 +13,7 @@ export default function Header({ auth }) {
           <Link to="/github">GitHub</Link>
         </li>
       </ul>
-      <Logout auth={auth} />
+      <Logout />
     </div>
   )
-}
-
-Header.propTypes = {
-  auth: PropTypes.object.isRequired
 }
