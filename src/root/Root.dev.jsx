@@ -2,9 +2,9 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
 import Router from '../routes'
-import DevTools from '../devtools'
+import DevTools from '../DevTools'
 
-export default function Root ({store}) {
+export default function Root({ store }) {
   return (
     <Provider store={store}>
       <div>
