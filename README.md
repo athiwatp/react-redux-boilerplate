@@ -29,6 +29,25 @@ yarn run format
 yarn build
 ```
 
+### Docker
+
+```
+# build image
+docker build \
+  -t brightwindanalysis/react-redux-boilerplate:latest \
+  -f docker/Dockerfile .
+
+# start temporary container
+docker run \
+  --rm \
+  -p 8080:80 \
+  --name react-redux-boilerplate \
+  brightwindanalysis/react-redux-boilerplate
+
+# access container
+docker exec -it react-redux-boilerplate sh
+```
+
 ### Documentation
 
 * [React Express](http://www.react.express) introduction
