@@ -1,12 +1,12 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
-import App from '../app/AppComponent'
+import Router from '../routes'
 
-export default function Root({ store }) {
+export default function Root ({store}) {
   return (
     <Provider store={store}>
-      <App />
+      <Router />
     </Provider>
   )
 }
