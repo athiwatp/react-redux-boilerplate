@@ -18,6 +18,51 @@ EOT
 }
 title
 
-echo "[+] EC2"
+EC2_USERNAME=$1
+EC2_HOST=$2
+HOST_PORT=$3
+CONTAINER_PORT=80
+DOCKER_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
-echo "[-] EC2"
+function deploy_ec2 {
+  echo "[*] deploy"
+
+  ssh ${EC2_USERNAME}@${EC2_HOST} << EOF
+
+    # aws login
+    eval $(aws ecr get-login --region $AWS_REGION)
+    # pull latest image
+    docker pull ${DOCKER_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:latest
+
+    # remove old container by name
+    docker ps -a -q -f name=${CIRCLE_PROJECT_REPONAME} | xargs --no-run-if-empty docker rm -f
+
+    # run container in background with logs disabled
+    docker run \
+      --detach \
+      -p ${HOST_PORT}:${CONTAINER_PORT} \
+      --log-driver none \
+      --name ${CIRCLE_PROJECT_REPONAME} \
+      ${DOCKER_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:latest
+
+    # delete dangling images <none>
+    docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
+    # delete dangling volumes
+    docker volume ls -q -f dangling=true | xargs --no-run-if-empty docker volume rm
+
+EOF
+}
+
+function main {
+  echo "[+][LOCAL] EC2"
+  deploy_ec2
+  echo "[-][LOCAL] EC2"
+}
+
+function verify_cmd {
+  command -v aws >/dev/null 2>&1 || { echo >&2 "[-] error: aws not found"; exit 1; }
+  command -v docker >/dev/null 2>&1 || { echo >&2 "[-] error: docker not found"; exit 1; }
+}
+
+verify_cmd
+main

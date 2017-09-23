@@ -35,7 +35,6 @@ jobs:
   # - AWS_ACCOUNT_ID
   # - AWS_REGION
   # - CIRCLE_PROJECT_REPONAME (default)
-  # - CIRCLE_WORKING_DIRECTORY (default)
   # - CIRCLE_SHA1 (default)
   registry:
     working_directory: ~/project
@@ -49,20 +48,28 @@ jobs:
           name: registry
           command: ./script/registry.sh
 
+  # - AWS_ACCOUNT_ID
+  # - AWS_REGION
+  # - EC2_USERNAME (DEV/PROD)
+  # - EC2_HOST (DEV/PROD)
+  # - HOST_PORT (DEV/PROD)
+  # - CIRCLE_PROJECT_REPONAME (default)
   deploy-dev:
     machine:
       enabled: true
     steps:
+      - checkout
       - run:
           name: deploy development
-          command: ./script/deploy.sh
+          command: ./script/deploy.sh ${EC2_USERNAME_DEV} ${EC2_HOST_DEV} ${HTTP_PORT_DEV}
   deploy-prod:
     machine:
       enabled: true
     steps:
+      - checkout
       - run:
           name: deploy production
-          command: ./script/deploy.sh
+          command: ./script/deploy.sh ${EC2_USERNAME_PROD} ${EC2_HOST_PROD} ${HTTP_PORT_PROD}
 
 workflows:
   version: 2
