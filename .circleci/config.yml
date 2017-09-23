@@ -25,12 +25,8 @@ jobs:
           name: test
           command: yarn test
 
-  deploy:
-    working_directory: ~/project
-      docker:
-        - image: circleci/node:8.4.0
-      - run:
-          name: deploy development
-          command: |
-            echo "TODO deploy DEV"
-            ./script/deploy.sh
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
