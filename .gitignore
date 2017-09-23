@@ -8,3 +8,5 @@ dist/
 .idea/
 
 yarn-error.log
+
+script/local/env.sh

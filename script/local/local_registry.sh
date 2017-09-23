@@ -22,15 +22,6 @@ EOT
 }
 title
 
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-
-AWS_ACCOUNT_ID=
-AWS_REGION=
-
-PROJECT_REPONAME=
-DOCKER_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
-
 function print_env_var {
   echo "[*] environment variables"
   echo -e "AWS_ACCESS_KEY_ID:\t$AWS_ACCESS_KEY_ID"
@@ -70,7 +61,14 @@ function main {
   echo "[-][LOCAL] ECR"
 }
 
-print_env_var
+FILE_ENV="env.sh"
+if [[ -f ${FILE_ENV} ]]; then
+  source ${FILE_ENV}
+  print_env_var
+else
+  echo "[-] ${FILE_ENV} not found"
+  exit 1
+fi
 
 read -p $'\nAre you sure? Press any key to continue or CTRL+c to exit' -n 1 -r && echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
