@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  custom-build:
+  build:
     working_directory: ~/project
     docker:
       - image: circleci/node:8.4.0
@@ -25,7 +25,7 @@ jobs:
           name: test
           command: yarn test
 
-  deploy-dev:
+  deploy:
     working_directory: ~/project
       docker:
         - image: circleci/node:8.4.0
@@ -35,7 +35,7 @@ jobs:
             echo "TODO deploy DEV"
             ./script/deploy.sh
 
-  deploy-prod:
+  deploy:
     working_directory: ~/project
       docker:
         - image: circleci/node:8.4.0
@@ -49,18 +49,18 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - custom-build
-      - deploy-dev:
+      - build
+      - deploy:
           requires:
-            - custom-build
+            - build
           filters:
             tags:
               ignore: /.*/
             branches:
               only: master
-      - deploy-prod:
+      - deploy:
           requires:
-            - custom-build
+            - build
           filters:
             tags:
               only: /^v.*/
