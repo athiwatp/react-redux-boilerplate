@@ -48,6 +48,13 @@ docker run \
 docker exec -it react-redux-boilerplate sh
 ```
 
+### Continuous integration and deployment
+
+Requirements for deployment on AWS
+* two EC2 instances (dev/prod) e.g. `ec2-000-000-000-000.AWS_REGION.compute.amazonaws.com`
+* EC2 Container Registry configured e.g. `AWS_ACCOUNT_ID.dkr.ecr.AWS_REGION.amazonaws.com/react-redux-boilerplate`
+* Credentials (Access Key ID and Secret Access Key) of a unique IAM user with `AmazonEC2ContainerRegistryPowerUser` permission to push on the registry
+
 ### Documentation
 
 * [React Express](http://www.react.express) introduction
@@ -60,3 +67,5 @@ docker exec -it react-redux-boilerplate sh
 * [React Router](https://reacttraining.com/react-router/web/guides/philosophy)
 * [Redux](http://redux.js.org) + [Redux DevTools](https://github.com/gaearon/redux-devtools)
 * [axios](https://github.com/mzabriskie/axios) + [redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware)
+* AWS [EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html)
+* AWS [ECR](http://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html)
