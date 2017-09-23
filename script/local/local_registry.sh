@@ -76,6 +76,7 @@ function init_env {
     exit 1
   fi
 }
+
 function verify_cmd {
   command -v aws >/dev/null 2>&1 || { echo >&2 "[-] error: aws not found"; exit 1; }
   command -v docker >/dev/null 2>&1 || { echo >&2 "[-] error: docker not found"; exit 1; }

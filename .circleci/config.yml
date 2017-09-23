@@ -44,6 +44,11 @@ jobs:
           name: build
           command: yarn build
       - run:
+          name: apt
+          command: |
+            apt update
+            apt -y install awscli
+      - run:
           name: registry
           command: ./script/registry.sh
 
