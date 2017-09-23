@@ -8,8 +8,6 @@ IFS=$'\n\t'
 CURRENT_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)
 cd ${CURRENT_PATH}
 
-ROOT_PATH="${CURRENT_PATH}/../../"
-
 title() {
 cat<<"EOT"
 

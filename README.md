@@ -58,6 +58,7 @@ Requirements for deployment on AWS
 Local (without CircleCI)
 ```
 ./script/local/local_registry.sh
+./script/local/local_deploy.sh
 ```
 
 ### Documentation
