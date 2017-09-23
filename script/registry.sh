@@ -22,12 +22,12 @@ DOCKER_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
 function login_aws {
   echo "[*] login"
-  eval $(aws ecr get-login --no-include-email --region $AWS_REGION)
+  eval $(aws ecr get-login --region $AWS_REGION)
 }
 
 function docker_build {
   echo "[*] build docker image"
-  docker build -t ${CIRCLE_PROJECT_REPONAME} -f ${CIRCLE_WORKING_DIRECTORY}/docker/Dockerfile .
+  docker build -t ${CIRCLE_PROJECT_REPONAME} -f docker/Dockerfile .
 }
 
 function docker_tag {
