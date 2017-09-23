@@ -75,27 +75,22 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      # all branches and all tags
       - build
       - registry:
           requires:
             - build
-          filters:
-            tags:
-              only: /.*/
-      # only master branch
       - deploy-dev:
           requires:
             - registry
+          # only master branch
           filters:
             tags:
               ignore: /.*/
             branches:
               only: master
-      # only tags
+      # deploy latest image available in prod
       - deploy-prod:
-          requires:
-            - registry
+          # only tags
           filters:
             tags:
               only: /^v.*/
