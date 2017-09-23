@@ -24,6 +24,9 @@ jobs:
       - run:
           name: test
           command: yarn test
+      - run:
+          name: build
+          command: yarn build
 
   # - AWS_ACCOUNT_ID
   # - AWS_REGION
@@ -31,23 +34,14 @@ jobs:
   # - CIRCLE_WORKING_DIRECTORY (default)
   # - CIRCLE_SHA1 (default)
   registry:
-    working_directory: ~/project
-    docker:
-      - image: circleci/node:8.4.0
+    machine:
+      enabled: true
     steps:
       - checkout
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
-      - run:
-          name: build
-          command: yarn build
-      - run:
-          name: apt
-          command: |
-            sudo apt update
-            sudo apt -y install awscli
       - run:
           name: registry
           command: ./script/registry.sh
