@@ -6,7 +6,9 @@ IFS=$'\n\t'
 
 # run from any directory (no symlink allowed)
 CURRENT_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)
-cd $CURRENT_PATH
+cd ${CURRENT_PATH}
+
+ROOT_PATH="${CURRENT_PATH}/../../"
 
 title() {
 cat<<"EOT"
@@ -34,22 +36,25 @@ function print_env_var {
 
 function login_aws {
   echo "[*] login"
-  #eval $(aws ecr get-login --no-include-email --region $AWS_REGION)
+  eval $(aws ecr get-login --no-include-email --region $AWS_REGION)
 }
 
 function docker_build {
   echo "[*] build docker image"
-  #docker build -t ${PROJECT_REPONAME} -f docker/Dockerfile .
+  cd ${ROOT_PATH}
+  yarn build
+  docker build -t ${PROJECT_REPONAME} -f docker/Dockerfile .
+  cd ${CURRENT_PATH}
 }
 
 function docker_tag {
   echo "[*] tag docker image"
-  #docker tag ${PROJECT_REPONAME} ${DOCKER_REGISTRY}/${PROJECT_REPONAME}:latest
+  docker tag ${PROJECT_REPONAME} ${DOCKER_REGISTRY}/${PROJECT_REPONAME}:latest
 }
 
 function push_ecr {
   echo "[*] push image"
-  #docker push ${DOCKER_REGISTRY}/${PROJECT_REPONAME}:latest
+  docker push ${DOCKER_REGISTRY}/${PROJECT_REPONAME}:latest
 }
 
 function main {
@@ -61,14 +66,24 @@ function main {
   echo "[-][LOCAL] ECR"
 }
 
-FILE_ENV="env.sh"
-if [[ -f ${FILE_ENV} ]]; then
-  source ${FILE_ENV}
-  print_env_var
-else
-  echo "[-] ${FILE_ENV} not found"
-  exit 1
-fi
+function init_env {
+  local FILE_ENV="env.sh"
+  if [[ -f ${FILE_ENV} ]]; then
+    source ${FILE_ENV}
+    print_env_var
+  else
+    echo "[-] error: ${FILE_ENV} not found"
+    exit 1
+  fi
+}
+function verify_cmd {
+  command -v aws >/dev/null 2>&1 || { echo >&2 "[-] error: aws not found"; exit 1; }
+  command -v docker >/dev/null 2>&1 || { echo >&2 "[-] error: docker not found"; exit 1; }
+  command -v yarn >/dev/null 2>&1 || { echo >&2 "[-] error: yarn not found"; exit 1; }
+}
+
+init_env
+verify_cmd
 
 read -p $'\nAre you sure? Press any key to continue or CTRL+c to exit' -n 1 -r && echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then

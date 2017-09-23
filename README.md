@@ -55,6 +55,11 @@ Requirements for deployment on AWS
 * EC2 Container Registry configured e.g. `AWS_ACCOUNT_ID.dkr.ecr.AWS_REGION.amazonaws.com/react-redux-boilerplate`
 * Credentials (Access Key ID and Secret Access Key) of a unique IAM user with `AmazonEC2ContainerRegistryPowerUser` permission to push on the registry
 
+Local (without CircleCI)
+```
+./script/local/local_registry.sh
+```
+
 ### Documentation
 
 * [React Express](http://www.react.express) introduction
