@@ -39,10 +39,12 @@ jobs:
   # - CIRCLE_SHA1 (default)
   registry:
     working_directory: ~/project
-    docker:
-      - image: anigeo/awscli
+    machine:
+      enabled: true
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/project
       - run:
           name: registry
           command: ./script/registry.sh
