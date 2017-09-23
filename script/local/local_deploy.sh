@@ -26,14 +26,58 @@ title
 
 function print_env_var {
   echo "[*] environment variables"
+  echo -e "EC2_USERNAME:\t\t$EC2_USERNAME"
+  echo -e "EC2_HOST:\t\t$EC2_HOST"
+  echo -e "EC2_KEY_PATH:\t\t$EC2_KEY_PATH"
+  echo -e "AWS_REGION:\t\t$AWS_REGION"
+  echo -e "PROJECT_REPONAME:\t$PROJECT_REPONAME"
+  echo -e "DOCKER_REGISTRY:\t$DOCKER_REGISTRY"
+  echo -e "HTTP_PORT:\t\t$HTTP_PORT"
 }
 
-function xxx {
-  echo "[*] "
+function docker_run {
+  local CONTAINER_PORT=80
+  local HOST_PORT=$1
+  local PROJECT_REPONAME=$2
+  local DOCKER_REGISTRY=$3
+  local PROJECT_REPONAME=$4
+
+  # run container in background with logs disabled
+  docker run \
+    --detach \
+    -p ${HOST_PORT}:${CONTAINER_PORT} \
+    --log-driver none \
+    --name ${PROJECT_REPONAME} \
+    ${DOCKER_REGISTRY}/${PROJECT_REPONAME}:latest
+}
+
+function deploy_ec2 {
+  echo "[*] deploy"
+
+  ssh ${EC2_USERNAME}@${EC2_HOST} -i ${EC2_KEY_PATH} << EOF
+
+    # aws login
+    eval $(aws ecr get-login --no-include-email --region $AWS_REGION)
+    # pull latest image
+    docker pull ${DOCKER_REGISTRY}/${PROJECT_REPONAME}:latest
+
+    # remove old container by name
+    docker ps -a -q -f name=${PROJECT_REPONAME} | xargs --no-run-if-empty docker rm -f
+
+    # invoke function
+    $(typeset -f); docker_run ${HTTP_PORT} ${PROJECT_REPONAME} ${DOCKER_REGISTRY} ${PROJECT_REPONAME}
+
+    # delete dangling images <none>
+    docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
+    # delete dangling volumes
+    docker volume ls -q -f dangling=true | xargs --no-run-if-empty docker volume rm
+
+EOF
 }
 
 function main {
   echo "[+][LOCAL] EC2"
+  deploy_ec2
   echo "[-][LOCAL] EC2"
 }
 
