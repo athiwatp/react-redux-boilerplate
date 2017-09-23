@@ -30,7 +30,9 @@ function deploy_ec2 {
   ssh ${EC2_USERNAME}@${EC2_HOST} << EOF
 
     # aws login
-    eval $(aws ecr get-login --region $AWS_REGION)
+    # http://docs.aws.amazon.com/cli/latest/reference/ecr/get-login.html#options
+    # use sed: --no-include-email is NOT working
+    eval $(aws ecr get-login --region $AWS_REGION --registry-ids $AWS_ACCOUNT_ID | sed 's/-e none//g')
     # pull latest image
     docker pull ${DOCKER_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:latest
 
