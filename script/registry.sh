@@ -18,6 +18,37 @@ EOT
 }
 title
 
-echo "[+] ECR"
+DOCKER_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
-echo "[-] ECR"
+function login_aws {
+  echo "[*] login"
+  eval $(aws ecr get-login --no-include-email --region $AWS_REGION)
+}
+
+function docker_build {
+  echo "[*] build docker image"
+  docker build -t ${CIRCLE_PROJECT_REPONAME} -f ${CIRCLE_WORKING_DIRECTORY}/docker/Dockerfile .
+}
+
+function docker_tag {
+  echo "[*] tag docker image"
+  docker tag ${CIRCLE_PROJECT_REPONAME} ${DOCKER_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+  docker tag ${CIRCLE_PROJECT_REPONAME} ${DOCKER_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:latest
+}
+
+function push_ecr {
+  echo "[*] push image"
+  docker push ${DOCKER_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+  docker push ${DOCKER_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:latest
+}
+
+function main {
+  echo "[+] ECR"
+  login_aws
+  docker_build
+  docker_tag
+  push_ecr
+  echo "[-] ECR"
+}
+
+main

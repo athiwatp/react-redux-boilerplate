@@ -25,6 +25,11 @@ jobs:
           name: test
           command: yarn test
 
+  # - AWS_ACCOUNT_ID
+  # - AWS_REGION
+  # - CIRCLE_PROJECT_REPONAME (default)
+  # - CIRCLE_WORKING_DIRECTORY (default)
+  # - CIRCLE_SHA1 (default)
   registry:
     working_directory: ~/project
     docker:
@@ -43,21 +48,16 @@ jobs:
           command: ./script/registry.sh
 
   deploy-dev:
-    working_directory: ~/project
-    docker:
-      - image: circleci/node:8.4.0
+    machine:
+      enabled: true
     steps:
-      - checkout
       - run:
           name: deploy development
           command: ./script/deploy.sh
-
   deploy-prod:
-    working_directory: ~/project
-    docker:
-      - image: circleci/node:8.4.0
+    machine:
+      enabled: true
     steps:
-      - checkout
       - run:
           name: deploy production
           command: ./script/deploy.sh

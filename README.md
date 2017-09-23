@@ -55,6 +55,14 @@ Requirements for deployment on AWS
 * EC2 Container Registry configured e.g. `AWS_ACCOUNT_ID.dkr.ecr.AWS_REGION.amazonaws.com/react-redux-boilerplate`
 * Credentials (Access Key ID and Secret Access Key) of a unique IAM user with `AmazonEC2ContainerRegistryPowerUser` permission to push on the registry
 
+CircleCI v2 setup
+* add the repository to [CircleCI](https://circleci.com/)
+* *Chat Notifications*: set a Webhook URL for [Slack](https://slack.com/apps/A0F7VRE7N-circleci) to get a notification on each build
+
+Configure the following CircleCI *Environment Variables*:
+* AWS_ACCOUNT_ID (registry)
+* AWS_REGION e.g. `eu-west-1` (without a/b/c)
+
 Local (without CircleCI)
 ```
 ./script/local/local_registry.sh
