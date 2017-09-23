@@ -14,10 +14,6 @@ jobs:
       - run:
           name: install
           command: yarn install
-      - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
-          paths:
-            - node_modules
       - run:
           name: lint
           command: yarn lint
@@ -27,6 +23,11 @@ jobs:
       - run:
           name: build
           command: yarn build
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+            - dist
 
   # - AWS_ACCOUNT_ID
   # - AWS_REGION
