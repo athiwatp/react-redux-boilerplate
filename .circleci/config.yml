@@ -1,24 +1,65 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/project
     docker:
       - image: circleci/node:8.4.0
-
-    working_directory: ~/working-directory
-
     steps:
       - checkout
-
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
-
-      - run: yarn install
-
+      - run:
+          name: install
+          command: yarn install
       - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: lint
+          command: yarn lint
+      - run:
+          name: test
+          command: yarn test
+  deploy-dev:
+    working_directory: ~/project
+      docker:
+        - image: circleci/node:8.4.0
+      - run:
+          name: deploy development
+          command: |
+            echo "TODO deploy DEV"
+            ./script/deploy.sh
+  deploy-prod:
+    working_directory: ~/project
+      docker:
+        - image: circleci/node:8.4.0
+      - run:
+          name: deploy production
+          command: |
+            echo "TODO deploy PROD"
+            ./script/deploy.sh
 
-      #- run: yarn test
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy-dev:
+          requires:
+            - build
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: master
+      - deploy-prod:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

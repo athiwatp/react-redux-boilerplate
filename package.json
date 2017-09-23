@@ -6,6 +6,7 @@
     "url": "https://github.com/brightwindanalysis/react-redux-boilerplate"
   },
   "scripts": {
+    "test": "echo TODO",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint \"src/**/*.js*\"",
