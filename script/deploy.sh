@@ -54,9 +54,9 @@ EOF
 }
 
 function main {
-  echo "[+][LOCAL] EC2"
+  echo "[+] EC2"
   deploy_ec2
-  echo "[-][LOCAL] EC2"
+  echo "[-] EC2"
 }
 
 function verify_cmd {
