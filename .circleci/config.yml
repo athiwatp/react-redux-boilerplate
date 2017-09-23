@@ -14,6 +14,10 @@ jobs:
       - run:
           name: install
           command: yarn install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - run:
           name: lint
           command: yarn lint
@@ -23,11 +27,9 @@ jobs:
       - run:
           name: build
           command: yarn build
-      - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
           paths:
-            - node_modules
-            - dist
+            - dist/*
 
   # - AWS_ACCOUNT_ID
   # - AWS_REGION
@@ -35,14 +37,11 @@ jobs:
   # - CIRCLE_WORKING_DIRECTORY (default)
   # - CIRCLE_SHA1 (default)
   registry:
-    machine:
-      enabled: true
+    working_directory: ~/project
+    docker:
+      - image: anigeo/awscli
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
       - run:
           name: registry
           command: ./script/registry.sh
