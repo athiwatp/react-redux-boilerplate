@@ -40,17 +40,27 @@ jobs:
           command: yarn build
       - run:
           name: registry
-          command: echo REGISTRY
+          command: ./script/registry.sh
 
-  deploy:
+  deploy-dev:
     working_directory: ~/project
     docker:
       - image: circleci/node:8.4.0
     steps:
       - checkout
       - run:
-          name: example
-          command: echo DEPLOY
+          name: deploy development
+          command: ./script/deploy.sh
+
+  deploy-prod:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:8.4.0
+    steps:
+      - checkout
+      - run:
+          name: deploy production
+          command: ./script/deploy.sh
 
 workflows:
   version: 2
@@ -60,6 +70,21 @@ workflows:
       - registry:
           requires:
             - build
-      - deploy:
+      # only master branch
+      - deploy-dev:
           requires:
             - registry
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: master
+      # only tags
+      - deploy-prod:
+          requires:
+            - registry
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
