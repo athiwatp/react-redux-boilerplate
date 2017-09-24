@@ -68,7 +68,11 @@ Configure the following CircleCI *Environment Variables*:
 * EC2_HOST_DEV and EC2_HOST_PROD e.g. `ec2-000-000-000-000.AWS_REGION.compute.amazonaws.com`
 * HTTP_PORT_DEV and HTTP_PORT_PROD e.g. `8080`
 
-Local deployment (without CircleCI)
+Deployment
+* a push on the master branch trigger a build and a deployment in `DEV`
+* a push of a tag starting with `v` trigger a deploy in `PROD` of the latest image available
+
+Local deployment (skip CircleCI)
 ```
 ./script/local/local_registry.sh
 ./script/local/local_deploy.sh
